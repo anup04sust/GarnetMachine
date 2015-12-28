@@ -1,0 +1,159 @@
+/* 
+* Overwrite Bootstrap Style
+*/
+
+.label{
+  border-radius:0;
+  &.label-default{
+/*    background-color: $color_dark4;
+    color: $color_deep1;*/
+  }
+}
+.well{
+  border-radius:0;
+  box-shadow: none;
+}
+.tab_wrap{
+  .nav-tabs{
+    border-bottom: 0;
+    > li{ 
+      margin:0px;
+      > a{
+        border-radius: 0;
+        margin:0px;
+        border: 0;       
+      }
+      &+li{
+       
+      }
+      &.active{
+        > a{
+         
+        }
+      }
+    }
+  }
+  .tab-content{
+    padding: 15px 35px;
+  }
+}
+.panel-group{
+  .panel{
+    border-radius: 0;
+    .panel-heading{
+      border-radius: 0;
+     
+      padding: 0px;
+
+      .accordion-toggle{
+        display: block;
+        text-decoration: none;
+        outline: none;
+        padding: 10px 15px 10px 55px;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        font-family: $base_font2;
+        color: $font-color1;
+        background-color: #ebebeb;
+      }
+    }
+  }
+}
+.table{
+  thead,tbody{
+    tr{
+      th{
+        border-top: 0;
+       
+      }
+    }
+  }
+}
+.btn{
+  border-radius: 0;
+  font-size:16px;
+  &+.btn{
+    margin-left: 5px;
+  }
+  &.btn-primary{
+   
+    border:0;
+   
+    opacity: 0.8;     
+    text-align: center;
+   
+    &:hover{
+     
+    }
+  }
+  &.btn-submit{    
+    padding: 12px 25px 11px;
+    background-color: #bc0e16;
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: 600;
+    &:hover{
+      box-shadow: 0 0 4px rgba(0,0,0,.5) inset;
+    }
+  }
+}
+.form-control{
+  box-shadow: none;
+  border-radius: 0;
+ 
+  @include transition(all, 0.25s);
+  &:focus{
+   
+  }
+}
+textarea.form-control{
+  max-height: 150px;
+  resize: vertical;
+}
+img.wpcf7-captchac{
+  
+  height: 50px;
+  width: 100px;
+  padding: 8px;
+}
+.modal{
+  .modal-dialog{
+    margin-top:100px;
+    .modal-content{
+      border-radius: 0;
+    }
+  }
+}
+.alert{
+  border-radius: 0;
+}
+#download-preview {
+  .modal-body{
+    padding: 0;
+  }
+}
+form{
+  .form-title{
+    margin-bottom: 13px;
+  }
+  .form-control{
+    border-radius: 0;
+    background-color: #f2f2f2;
+    border-color: #f2f2f2;
+    box-shadow: none;
+    color: #696969;
+    height: 43px;
+    padding: 6px 14px;
+    font-size:16px;
+    &:focus{
+      background-color: #fff;
+      border-color: #bc0e16;
+      border-radius: 1px;
+      box-shadow: none;
+    }   
+  }
+  textarea.form-control{
+    min-height: 180px;    
+  }
+}

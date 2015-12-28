@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/bootstrap.css" />
+    <link rel="stylesheet" href="../../css/admin.css" />
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="../bootstrap.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#insert').click(function() {
+            var content = $('body').find('input[name=content]').val();
+            var size = $('body').find('select[name=size]').val();           
+            var shortcode = '[els_heading size="' + size + '" text="'+content+'"]';
+            top.tinymce.activeEditor.insertContent(shortcode);
+            top.tinymce.activeEditor.windowManager.close();
+        });
+    });
+    </script>
+</head>
+
+<body>
+<div class="container">
+        <form role="form">
+            <div class="form-group">
+                <label for="text">Text</label>
+                <input type="text" class="form-control" id="content" name="content" placeholder="Content" onclick="this.select()" />
+                <label for="size">Size</label>
+                <select class="form-control" id="size" name="size">
+                    <option value="h1" >H1</option>
+                    <option value="h2" selected>H2</option>
+                    <option value="h3">H3</option>
+                    <option value="h4">H4</option>
+                    <option value="h5">H5</option>
+                    <option value="h6">H6</option>
+                </select>
+            </div>
+            <button type="submit" id="insert" class="btn btn-primary">Insert</button>
+        </form>
+    </div>
+</body>
+</html>

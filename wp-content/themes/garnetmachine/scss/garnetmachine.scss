@@ -1,0 +1,484 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Dec 21, 2015, 12:33:25 PM
+    Author     : Anup Biswas <anup@illusivedesign.net>
+*/
+
+@import "variables";
+@import "mixin";
+html,body{
+  font-family: $base_font2;;
+  font-size: 16px;
+  color: $font-color1;
+}
+h1,h2,h3,h4,h5{
+  font-family: $base_font2;
+  font-weight: bold;
+  color: #000;
+}
+h1{
+  font-size: $heading1;
+}
+h2{
+  font-size: $heading2;
+}
+h3{
+  font-size: $heading3;
+}
+h4{
+  font-size: $heading4;
+}
+h5{
+  font-size: $heading5;
+}
+@import "header";
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Header ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#page-banner{
+  &.innerbanner{
+    min-height: 120px;
+    .banner-content{
+      position: relative;
+      min-height: 120px;
+    }
+    .page-title{
+      background: none;
+      font-size: $heading1;
+      margin-top: 22px;
+      padding-left: 0px;
+      padding-bottom: 0px;
+      color: #fff;
+    }
+    .page-subtitle{
+      font-size: $heading4;
+      color: $font-color3;
+      padding-left: 15px;
+    }
+
+    .breadcrumb{
+      background: transparent;
+      padding:10px 25px;
+      margin: 0;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      border-radius: 0;
+      background-color: rgba(77,5,9,.4);
+      > li{
+        a,span{
+          color: #fffefe;
+          font-size: $font-size-xs1;
+        }
+      }
+    }
+  } 
+}
+@import "camera-slider";
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Banner ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#main-contents{
+  position: relative;
+  background-color: #fff;
+  opacity: 1;
+
+  .page-block{
+    padding:45px 0px 44px;
+    .block-title{
+      text-transform: uppercase;
+      color: $font-color1;
+      @media (max-width: $screen-md-min) {
+        text-align:center;
+      }
+    }
+  }
+  .products-grid{
+    padding: 25px 11px 10px;
+    .product-gcol{
+      padding: 0 4px;
+      .product-thumb{
+        padding: 0;
+        border-radius: 0;
+        text-align: center;
+        position: relative;
+        margin-bottom: 8px;
+        box-shadow: 1px 0px 3px rgba(0,0,0,.08);
+        border: 0;        
+        @include transition(all, 0.5s);
+        >img{
+          max-width: 100%;
+        }
+        .caption{
+          border-top: 1px solid $border-color;
+          font-size: $font-size-xs1;
+          color: $font-color1;
+          font-weight: bold;
+          text-align: left;
+          padding: 14px 18px;         
+          min-height: 70px;
+          p{
+            margin: 0;
+          }
+        }
+        >.thumbnail-links{
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          top: 0;
+          right: 0;
+          display: block;
+          z-index: 1;
+        }
+        &:hover{
+          box-shadow: 1px 0px 3px rgba(0,0,0,.5);
+          //@include  box-shadow(1px, 1px ,2px, transparentize($color_dark,.85));
+        }
+      }
+    }
+  }
+  #service-widgets{
+    background-color:#333;
+    padding-bottom:20px;
+    .widgets-areas{
+      padding-top: 30px;
+      padding-bottom: 0px;
+    }
+    .block-title{
+      color: #fff;
+      text-align: center;
+    }
+    .widget{
+      margin-bottom:30px;
+      .wdrap{
+        border: 1px solid rgba(230,230,230,.28);
+        background-color: rgba(44,44,44,.3);
+        color: $font-color3;
+        position: relative;
+        overflow: hidden;
+        padding: 25px 28px 0px;
+        .widget-title{
+          color: $font-color4;
+          font-size: $font-size-base;
+          text-transform: uppercase;
+          margin-bottom: 25px;
+        }
+        ul{
+          padding: 0px;
+          margin: 0px;
+          margin-bottom: 25px;
+          > li{
+            list-style: none;
+            a{
+              color: inherit;
+              text-decoration: none;
+            }
+          }
+        }
+        &:after{
+          content: " ";
+          position: absolute;
+          top: -20px;
+          right: -20px;
+          width: 2.386em;
+          height: 2.386em;
+          background: $font-color2;
+          z-index: 10;
+          @include rotate(136);
+        }
+      }
+    }
+  }
+  #gallery-tiles{
+    .gallery-wrap{
+      padding: 27px 0px 10px;
+      .gallery-gcol{
+        overflow: hidden;
+        vertical-align: top;        
+        display: inline-block;
+      }
+    }
+    .block-title{
+      text-align: center;
+      color: $font-color1;
+    }
+    .gallery-thumb{
+      padding: 0;
+      border-radius: 0;
+      position: relative;
+      border: 0;
+      padding: 0px;
+      margin:0px 0 10px;
+      .caption{
+        display: none;
+      }
+      .thumbnail-links{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 10;
+        right: 0;        
+        background:rgba(0,0,0,.3) url(../images/zoom.png) center center no-repeat;
+        opacity: 0;
+        @include transition(all, 0.5s);
+        &:hover{
+          opacity: 1;
+        }
+      }
+    }
+    .block-bottom{
+      .btn-link{
+        color: $font-color2;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+#bottom-widgets{
+  background-color: $bg-color2;
+  position: relative;
+  .widget{
+    .widget-title{
+      color: $font-color3;
+      font-size: $font-size-base;
+    }
+    .textwidget{
+      font-size: $font-size-sm;
+      color: $font-color3;
+    }
+    .menu{
+      padding: 0;
+      margin: 0;
+      >li{
+        display: block;
+        list-style: none;
+        > a{
+          font-size: $font-size-sm;
+          color: $font-color3;
+          text-decoration: none;
+          border-bottom: 1px solid $border-color2;
+          display: block;
+          padding: 6px 0px;
+          &:hover{
+            color: $font-color2;
+          }
+        }
+      }
+    }
+  }
+  &:after{
+    position: absolute;
+    content: " ";
+    width: 60px;
+    height: 72px;
+    top: -45px;
+    left: 50%;
+    margin-left: -30px;
+    background-color: transparent;
+    background-image: url(../images/logo-small.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 1;
+  }
+}
+#footer{
+  background: $bg-color3;
+  .footer-nav{
+    margin-bottom: 0;
+    font-size: $font-size-xs1;
+    font-weight: lighter;
+    color:$font-color3;
+    a{
+      color: inherit;
+    }
+  }
+  .copyright{
+    margin-bottom: 0;
+    font-size: $font-size-xs1;
+    font-weight: lighter;
+    color:$font-color3;
+    a,p{
+      color: inherit;
+    }
+  }
+}
+#inner-content{
+  img.aligin-left{
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+  }
+  .entry-sidebar{
+    .widget{
+      .widget-title{
+        background-color: $bg-color4;
+        color: #fff;
+        border-bottom:0;
+        font-size: $font-size-base;
+        padding: 6px 10px 5px;
+      }
+      .winner{
+        background: $bg-color5;
+        font-size: $font-size-sm;
+        padding:20px;
+      }
+    }
+  }
+}
+.popup-gallery{
+  text-align:center;
+  .gallery-item{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    .thumbnail{
+      padding: 0;
+
+      display: block;
+      border: 0;
+      border-radius: 0;
+      margin: 3px;
+      max-width: 66px;
+      max-height: 68px;
+      overflow: hidden;
+      @include transition(all, 0.5s);
+      &:hover{
+        opacity: .8;
+        background: #000;
+      }
+    }
+  }
+}
+.page-template-tpl-contactus2{
+  .contact-sideinner{
+    h3{
+      margin-bottom: 15px;
+    }
+    .theme_social{
+      >li{
+        >a{
+          background: $font-color2;
+          color: #fff;
+        }
+      }
+    }
+    .address-box{
+      color: $font-color1;
+      .address{
+        color: $font-color1;
+      }
+      a{
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+}
+.els-heading{
+  position: relative;
+  &:before{
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    right: 0;
+    margin-top: -3px;
+    border-width: 1px 0px;
+    border-color: #E2E2E2;  
+    border-style: solid;
+    height: 6px;
+
+  }
+  .sr{
+    background: #FFF;
+    position: relative;
+    z-index: 1;
+    padding-right: 20px;
+  }
+}
+.eli-dropcap{
+  position: relative;
+  >p:first-child{
+    &:first-letter{     
+      color: $font-color2;
+      font-weight: bold;
+      float: left;    
+      font-size: 50px;
+      height: 50px;
+      line-height: 50px;
+      margin-right: 10px;
+      padding: 10px;
+    }
+  }
+  &.dropcap-small{
+    >p:first-child{
+      &:first-letter{         
+        font-weight: bold;
+        float: left;    
+        font-size: 30px;
+        height: 30px;
+        line-height: 30px;
+        margin-right: 5px;
+        padding: 5px;
+      }
+    }
+  }
+  &.dropcap-large{
+    >p:first-child{
+      &:first-letter{         
+        font-weight: bold;
+        float: left;    
+        font-size: 90px;
+        height: 90px;
+        line-height: 90px;
+        margin-right: 20px;
+        padding: 20px;
+      }
+    }
+  }
+
+}
+.entry-content{
+  p{
+    line-height: 1.4;
+  }
+  figure,img{
+    &.wp-caption{
+      .wp-caption-text{
+        background: #f9f9f9;
+        padding: 8px 15px;
+        line-height: 1.2;
+        font-size: $font-size-xs;
+      }
+    }
+    &.alignleft{
+      float: left;
+      margin-right: 25px;
+      margin-bottom: 25px;
+      margin-top: 8px;
+    }
+    &.alignright{}
+    &.aligncenter{}
+  }
+  hr,.hr{
+    border-width: 1px 0px;
+    border-color: #E2E2E2;  
+    border-style: solid;
+    height: 6px;
+    clear: both;
+  }
+  .blockquote,blockquote{
+    padding:16px 20px !important;
+    border-width:0 0 0 2px!important;
+    border-color: $font-color2!important;
+    box-shadow: none!important;
+    background-color: #f9f9f9;
+    font-style: italic;
+    color: $font-color1!important;
+    margin-left: 40px;
+    
+  }
+}
+@import "bootstrap";

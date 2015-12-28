@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/bootstrap.css" />
+    <link rel="stylesheet" href="../../css/admin.css" />
+    <script type="text/javascript" src="../jquery.js"></script>
+    <script type="text/javascript" src="../bootstrap.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#insert').click(function () {
+          var content = $('body').find('textarea[name=dropcap_content]').val();
+          var size = $('body').find('select[name=size]').val();
+          var shortcode = '[els_dropcap size="' + size + '"]';
+            shortcode += content;
+            shortcode += '[/els_dropcap]';
+          top.tinymce.activeEditor.insertContent(shortcode);
+          top.tinymce.activeEditor.windowManager.close();
+        });
+      });
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <form role="form">
+        <div class="form-group">
+          <label for="size">Size</label>
+          <select class="form-control" id="size" name="size">
+            <option value="small" >Small</option>
+            <option value="medium" selected>Medium</option>
+            <option value="large">Large</option>            
+          </select>
+          <label for="dropcap_content">Text</label>
+          <textarea class="form-control" id="dropcap_content" name="dropcap_content" placeholder="Content" rows="8"></textarea> 
+        </div>
+        <button type="submit" id="insert" class="btn btn-primary">Insert</button>
+      </form>
+    </div>
+  </body>
+</html>
