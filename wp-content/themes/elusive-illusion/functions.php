@@ -41,6 +41,7 @@ require_once ELUSICVE_THEME_INC.'theme-breadcrumbs.php';
 require_once ELUSICVE_THEME_INC.'class-slider-content-type.php';
 require_once ELUSICVE_THEME_INC.'class-products-content-type.php';
 require_once ELUSICVE_THEME_INC.'class-gallery-content-type.php';
+require_once ELUSICVE_THEME_INC.'class-service-content-type.php';
 //require_once ELUSICVE_THEME_INC.'class-testimonial-content-type.php';
 
 /*

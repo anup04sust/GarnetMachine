@@ -764,6 +764,7 @@ class ELI_Config {
   }
 
   public function addExtensions($ReduxFramework) {
+     return false; 
     $path = dirname(__FILE__) . '/extensions/';
     $folders = scandir($path, 1);
     if(empty($folders)) return false;

@@ -14,7 +14,7 @@
 class Service_Content_Type {
 
   private $post_type = 'eli_service';
-  private $slug = 'service';
+  private $slug = 'services';
   private $lan = ELUSICVE_THEME_LAN;
   private $taxonomy = 'service-catalog';
 
@@ -27,7 +27,7 @@ class Service_Content_Type {
 
   public function register() {
     $service_labels = array(
-      'name' => _x('Service', 'post type general name', $this->lan),
+      'name' => _x('Services', 'post type general name', $this->lan),
       'singular_name' => _x('Service', 'post type singular name', $this->lan),
       'menu_name' => _x('Services', 'admin menu', $this->lan),
       'name_admin_bar' => _x('Service', 'add new on admin bar', $this->lan),
