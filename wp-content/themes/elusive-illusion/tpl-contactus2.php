@@ -7,7 +7,7 @@
  */
 get_header();
 global $eli_options;
-get_template_part('templatepart/page', 'banner');
+get_template_part('template-parts/page', 'banner');
 ?> 
 <section id="inner-content">
   <div class="<?php theme_layout_style(); ?>">

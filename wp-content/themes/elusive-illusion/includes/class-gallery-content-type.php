@@ -108,13 +108,13 @@ class Gallery_Content_Type {
 
   function metabox() {
     if (function_exists("register_field_group")) {
-      register_field_group(array(
+/*      register_field_group(array(
         'id' => 'acf_album_metabox',
         'title' => 'Cover Photo',
         'fields' => array(
           array(
             'key' => 'gallery_album_cover',
-            'label' => 'Cover Image',
+            'label' => 'Cover Image(358X254)',
             'name' => 'cover_image',
             'type' => 'image',
             'save_format' => 'object',
@@ -154,14 +154,14 @@ class Gallery_Content_Type {
         ),
         'menu_order' => 0,
       ));
-
+*/
       register_field_group(array(
         'id' => 'acf_images',
-        'title' => 'Images',
+        'title' => 'Cover Images',
         'fields' => array(
           array(
             'key' => 'gallery_image_grid_size',
-            'label' => 'Grid Size',
+            'label' => 'Tile Grid Size',
             'name' => 'grid_size',
             'type' => 'radio',
             'instructions' => 'Select a size depends on your thumbnail size',
@@ -177,7 +177,7 @@ class Gallery_Content_Type {
           ),
           array(
             'key' => 'gallery_image_thumbnail',
-            'label' => 'Thumbnail',
+            'label' => 'Tile Thumbnail',
             'name' => 'thumbnail',
             'type' => 'image',
             'instructions' => 'Small (150X110), Medium (320X230),	Large (450X350) in pixel
@@ -187,12 +187,11 @@ class Gallery_Content_Type {
             'library' => 'all',
           ),
           array(
-            'key' => 'gallery_image_origianl_image',
-            'label' => 'Preview Image',
-            'name' => 'origianl_image',
+            'key' => 'gallery_image_cover',
+            'label' => 'Listing Cover Image',
+            'name' => 'listing_cover_image',
             'type' => 'image',
-            'instructions' => 'Any size try max width 1920px, when upload add image meta data. e.g. Title, Caption, Alternative Text, Description
-	',
+            'instructions' => 'Same size for all gallery e.g.(358X254)',
             'save_format' => 'object',
             'preview_size' => 'thumbnail',
             'library' => 'all',
@@ -249,8 +248,7 @@ function get_eli_gallerys($args = array()) {
       $sdata->grid_size = get_field('grid_size', $gallery->ID);
       $thumbnail_att_id = get_field('thumbnail', $gallery->ID);
       $sdata->thumbnail = wp_get_attachment_url($thumbnail_att_id);
-      $org_att_id = get_field('origianl_image', $gallery->ID);
-      $sdata->preview = wp_get_attachment_url($org_att_id);
+      $sdata->link = get_the_permalink($gallery->ID);
       $gallerys_data[$key] = $sdata;
     }
   }

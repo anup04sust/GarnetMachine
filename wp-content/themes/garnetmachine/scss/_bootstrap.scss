@@ -15,48 +15,95 @@
 }
 .tab_wrap{
   .nav-tabs{
+    display: table;
+    width: 100%;
     border-bottom: 0;
     > li{ 
       margin:0px;
+      float: none;
+      display:table-cell;      
       > a{
         border-radius: 0;
-        margin:0px;
-        border: 0;       
+        margin:0px!important;
+        border: 1px solid #bc0e16!important;      
+        display: block;
+        text-align: center;
+        outline: none;
+        color: #bc0e16;
+        &:hover{
+          background: rgba(188,14,22,.1);
+        }
       }
       &+li{
-       
+       padding-left: 5px;
       }
       &.active{
         > a{
-         
+         background: #bc0e16;
+         color: #fff;
         }
       }
     }
   }
   .tab-content{
-    padding: 15px 35px;
+    padding: 23px 0px;
   }
 }
 .panel-group{
+  margin-bottom:30px;
   .panel{
     border-radius: 0;
+     border:  0px;
+      box-shadow: none;
     .panel-heading{
       border-radius: 0;
-     
       padding: 0px;
-
+        border:  0px;
       .accordion-toggle{
         display: block;
+        border: 0;
         text-decoration: none;
+        position: relative;
         outline: none;
         padding: 10px 15px 10px 55px;
         font-weight: normal;
         font-size: 16px;
+         height: 40px;
         line-height: 20px;
         font-family: $base_font2;
         color: $font-color1;
         background-color: #ebebeb;
+        &:before{
+          position: absolute;
+          font-family: 'FontAwesome';
+          content: "\f068";
+          left: 0;
+          height: 40px;
+          width: 40px;
+          line-height: 40px;
+          text-align: center;
+          top: 0;
+        
+          background-color: #bc0e16;
+          color: #fff;
+        }
+        &.collapsed{
+          &:before{
+             content: "\f067";
+             background-color: #404040;
+          }
+        }
       }
+    }
+    .panel-collapse{
+      box-shadow: none;
+    }
+    .panel-body{
+      padding: 20px 0px 0;
+      box-shadow: none;
+    }
+    &+.panel{
+      margin-top:25px; 
     }
   }
 }

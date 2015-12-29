@@ -37,7 +37,7 @@ if (!empty($album_images)) :
               <div class="caption">              
                 <?php echo wpautop($img->title);?>
               </div>
-              <a href="<?php echo $img->preview; ?>" class="thumbnail-links"></a>
+              <a href="<?php echo $img->link; ?>" class="thumbnail-links"></a>
             </div>
             </div>          
         <?php endforeach;

@@ -12,7 +12,7 @@ class Theme_Contact_Widget extends WP_Widget {
    */
   public function __construct() {
     parent::__construct(
-        'theme_contact', __('Theme Contact Widget', 'mclinic'), array('description' => __('A Contact Widget', 'mclinic'),)
+        'theme_contact', __('Theme Contact Widget', ELUSICVE_THEME_LAN), array('description' => __('A Contact Widget', ELUSICVE_THEME_LAN),)
     );
   }
 
@@ -79,7 +79,7 @@ class Theme_Contact_Widget extends WP_Widget {
    */
   public function form($instance) {
 
-    $title = !empty($instance['title']) ? $instance['title'] : __('', 'mclinic');
+    $title = !empty($instance['title']) ? $instance['title'] : __('', ELUSICVE_THEME_LAN);
     ?>
     <p>
       <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label> 
@@ -87,7 +87,7 @@ class Theme_Contact_Widget extends WP_Widget {
     </p>
 
     <?php
-    $address = !empty($instance['address']) ? $instance['address'] : __('', 'mclinic');
+    $address = !empty($instance['address']) ? $instance['address'] : __('', ELUSICVE_THEME_LAN);
     ?>
     <p>
       <label for="<?php echo $this->get_field_id('address'); ?>"><?php _e('Address:'); ?></label> 
@@ -96,7 +96,7 @@ class Theme_Contact_Widget extends WP_Widget {
     </p>
 
     <?php
-    $phone = !empty($instance['phone']) ? $instance['phone'] : __('', 'mclinic');
+    $phone = !empty($instance['phone']) ? $instance['phone'] : __('', ELUSICVE_THEME_LAN);
     ?>
     <p>
       <label for="<?php echo $this->get_field_id('phone'); ?>"><?php _e('Phone:'); ?></label> 
@@ -105,7 +105,7 @@ class Theme_Contact_Widget extends WP_Widget {
     </p>       
 
     <?php
-    $fax = !empty($instance['fax']) ? $instance['fax'] : __('', 'mclinic');
+    $fax = !empty($instance['fax']) ? $instance['fax'] : __('', ELUSICVE_THEME_LAN);
     ?>
     <p>
       <label for="<?php echo $this->get_field_id('fax'); ?>"><?php _e('Fax:'); ?></label> 
@@ -114,7 +114,7 @@ class Theme_Contact_Widget extends WP_Widget {
     </p>
 
     <?php
-    $email = !empty($instance['email']) ? $instance['email'] : __('', 'mclinic');
+    $email = !empty($instance['email']) ? $instance['email'] : __('', ELUSICVE_THEME_LAN);
     ?>
     <p>
       <label for="<?php echo $this->get_field_id('email'); ?>"><?php _e('Email Address:'); ?></label> 
@@ -123,7 +123,7 @@ class Theme_Contact_Widget extends WP_Widget {
     </p>
 
     <?php
-    $webaddress = !empty($instance['webaddress']) ? $instance['webaddress'] : __('', 'mclinic');
+    $webaddress = !empty($instance['webaddress']) ? $instance['webaddress'] : __('', ELUSICVE_THEME_LAN);
     ?>
     <p>
       <label for="<?php echo $this->get_field_id('webaddress'); ?>"><?php _e('Web Address:'); ?></label> 
@@ -132,7 +132,7 @@ class Theme_Contact_Widget extends WP_Widget {
     </p>
 
     <?php
-    $visiting_hours = !empty($instance['visiting_hours']) ? $instance['visiting_hours'] : __('', 'mclinic');
+    $visiting_hours = !empty($instance['visiting_hours']) ? $instance['visiting_hours'] : __('', ELUSICVE_THEME_LAN);
     ?>
     <p>
       <label for="<?php echo $this->get_field_id('visiting_hours'); ?>"><?php _e('Visiting Hours:'); ?></label> 

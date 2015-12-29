@@ -35,6 +35,9 @@ h4{
 h5{
   font-size: $heading5;
 }
+span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
+  display: none;
+}
 @import "header";
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ End Header ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #page-banner{
@@ -43,11 +46,13 @@ h5{
     .banner-content{
       position: relative;
       min-height: 120px;
+      padding-bottom: 22px;
     }
     .page-title{
       background: none;
       font-size: $heading1;
       margin-top: 22px;
+      
       padding-left: 0px;
       padding-bottom: 0px;
       color: #fff;
@@ -71,6 +76,13 @@ h5{
         a,span{
           color: #fffefe;
           font-size: $font-size-xs1;
+          display: inline-block;
+          max-width: 150px;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          line-height: 1;
+            
         }
       }
     }
@@ -309,6 +321,7 @@ h5{
     float: left;
     margin-right: 15px;
     margin-bottom: 15px;
+    margin-top: 6px;
   }
   .entry-sidebar{
     .widget{
@@ -323,32 +336,55 @@ h5{
         background: $bg-color5;
         font-size: $font-size-sm;
         padding:20px;
+        .btn-link{
+          color: $font-color2;
+          padding: 6px 0px;
+        }
+        .form-group{
+          .form-control{
+            color: $font-color1;
+            background: #fff;
+            border-color: #FFF;
+          }
+        }
+        .btn.btn-submit{
+              padding: 6px 15px;
+        }
       }
     }
   }
 }
-.popup-gallery{
-  text-align:center;
-  .gallery-item{
-    display: inline-block;
-    vertical-align: top;
-    position: relative;
-    .thumbnail{
-      padding: 0;
+.gallery-popup-wrap{
+  .popup-gallery{
+    text-align:center;
+    .gallery-item{
+      display: inline-block;
+      vertical-align: top;
+      position: relative;
+      .thumbnail{
+        padding: 0;
 
-      display: block;
-      border: 0;
-      border-radius: 0;
-      margin: 3px;
-      max-width: 66px;
-      max-height: 68px;
-      overflow: hidden;
-      @include transition(all, 0.5s);
-      &:hover{
-        opacity: .8;
-        background: #000;
+        display: block;
+        border: 0;
+        border-radius: 0;
+        margin: 3px;
+        max-width: 66px;
+        max-height: 68px;
+        overflow: hidden;
+        @include transition(all, 0.5s);
+        &:hover{
+          opacity: .8;
+          background: #000;
+        }
       }
     }
+
+  }
+  .gallery-link{
+    display: inline-block;
+    color: $font-color2;
+    padding: 8px 0px;
+    text-decoration: none;
   }
 }
 .page-template-tpl-contactus2{
@@ -440,45 +476,231 @@ h5{
   }
 
 }
-.entry-content{
-  p{
-    line-height: 1.4;
-  }
-  figure,img{
-    &.wp-caption{
-      .wp-caption-text{
-        background: #f9f9f9;
-        padding: 8px 15px;
-        line-height: 1.2;
-        font-size: $font-size-xs;
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Inner Contents ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+#inner-content{
+  .entry-content{
+    p{
+      line-height: 1.4;
+    }
+    figure,img{
+      &.wp-caption{
+        .wp-caption-text{
+          background: #f9f9f9;
+          padding: 8px 15px;
+          line-height: 1.2;
+          font-size: $font-size-xs;
+        }
+      }
+      &.alignleft{
+        float: left;
+        margin-right: 25px;
+        margin-bottom: 25px;
+        margin-top: 8px;
+      }
+      &.alignright{}
+      &.aligncenter{}
+    }
+    hr,.hr{
+      border-width: 1px 0px;
+      border-color: #E2E2E2;  
+      border-style: solid;
+      height: 6px;
+      clear: both;
+    }
+    .blockquote,blockquote{
+      padding:16px 20px !important;
+      border-width:0 0 0 2px!important;
+      border-color: $font-color2!important;
+      box-shadow: none!important;
+      background-color: #f9f9f9;
+      font-style: italic;
+      color: $font-color1!important;
+      margin-left: 40px;
+
+    }
+    ul.square{
+          margin: 0 0 15px;
+    padding: 0;
+      > li{
+        list-style: none;
+        display: block;
+        position: relative;
+        padding: 0 0 0 20px;
+        &:before{
+          position: absolute;
+          content: " ";
+          width: 9px;
+          height: 9px;
+          left: 0;
+          top: 9px;    
+          background-color: $font-color2;
+        }
       }
     }
-    &.alignleft{
-      float: left;
-      margin-right: 25px;
-      margin-bottom: 25px;
-      margin-top: 8px;
+  }
+  /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Product Listing ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  .eli_products,.eli_service{
+    border-bottom:1px solid $border-color;
+    margin-bottom:45px;
+    .entry-content{
+      margin-bottom: 45px;
     }
-    &.alignright{}
-    &.aligncenter{}
+    .featured-image{
+      padding: 0;
+    }
+    .entry-header{
+      padding: 0;
+      margin: 0;
+      border: 0;
+      .entry-title{
+        color: $font-color2;
+        >a{
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+    }
+    .entry-excerpt{
+      p{}
+      .btn-link{
+        padding: 0;
+        color: $font-color2;
+      }
+    }
+    &.single-product{
+      border-bottom:0px;
+    }
   }
-  hr,.hr{
-    border-width: 1px 0px;
-    border-color: #E2E2E2;  
-    border-style: solid;
-    height: 6px;
-    clear: both;
+  /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Service Listing ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Gallery Listing ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  .album-wrap{
+    border-bottom:1px solid $border-color;
+    padding-bottom:15px;
+    margin-bottom:30px;
+    .album-title{
+      color: $font-color2;
+      margin-bottom: 25px;
+    }
+    .btn-link{
+      padding: 6px 0;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: $font-color2;
+    }
+    .gallery-item{
+      .thumbnail{
+        position: relative;
+        overflow: hidden;
+        border-radius: 0;
+        padding: 0;
+        border: 0;
+        img{
+          width: 100%;
+          height: auto;
+           @include transition(all, 0.5s);
+        }
+        .caption{
+          position: absolute;
+          left: 0;
+          top: 0;
+          right: 0;
+          background-image: url(../images/inner-shadow.png);
+          background-position:left bottom;
+          background-repeat: repeat-x;
+          bottom: 0;
+          
+          >span{
+            position: absolute;
+            bottom: 14px;
+            left: 22px;
+            font-size: 20px;
+            right: 22px;
+            font-weight: bold;
+            color: #fff;          
+            overflow: hidden;           
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+        &:hover{
+          img{         
+           @include scale(1.2);
+          }
+        }
+      }
+    }
+    &.album-page{
+      border-bottom: 0;
+    }
   }
-  .blockquote,blockquote{
-    padding:16px 20px !important;
-    border-width:0 0 0 2px!important;
-    border-color: $font-color2!important;
-    box-shadow: none!important;
-    background-color: #f9f9f9;
-    font-style: italic;
-    color: $font-color1!important;
-    margin-left: 40px;
-    
+  /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Bootstrap Custom ~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+  .post-navigation{
+    border-top: 1px solid $border-color;
+    padding: 10px 0;
+    margin-bottom:25px;
+    h2.screen-reader-text{
+      display: none;
+    }
+    .nav-links{
+      display: table;   
+      width: 100%;
+      >div{
+        display: table-cell;
+        vertical-align: top;
+        width: 50%;
+        >a{
+          color: inherit;
+          display: inline-block;
+          font-size: 14px;
+          line-height: 22px;
+          max-width: 180px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          position: relative;
+          &:after{           
+            font-family: 'FontAwesome';
+            position: absolute;
+            top: 0px;           
+          }
+        }
+        &.nav-previous{
+          >a{
+            padding-left: 20px;
+            &:after{
+              content: "\f100";
+              left: 0;
+            }
+          }
+        }
+        &.nav-next{
+          text-align: right;   
+          >a{
+            padding-right: 20px;
+            &:after{
+              content: "\f101";
+              right: 0;
+            }
+          }
+        }
+      }
+    }
   }
+  &.sidebar-left-inner{
+    .page-contents{
+      padding: 0 52px 50px 15px;
+    }
+  }
+  
+span.wpcf7-not-valid-tip {
+    border: 1px solid;
+    color: #f00;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-top: 4px;
+    opacity: 0.7;
+    padding: 2px 10px;
 }
+}
+
 @import "bootstrap";

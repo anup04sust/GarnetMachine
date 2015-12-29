@@ -8,7 +8,7 @@
 get_header();
 global $eli_options;
 ?>  
-        <?php get_template_part('templatepart/home', 'slider'); ?> 
+        <?php get_template_part('template-parts/home', 'slider'); ?> 
         <section id="inner-content">
           <div class="<?php theme_layout_style(); ?>">
             <div class="row">
@@ -25,8 +25,8 @@ global $eli_options;
           </div>
         </section>
 <?php 
-get_template_part('templatepart/tweetie', 'carousel'); 
- get_template_part('templatepart/bottom', 'widgets'); 
+get_template_part('template-parts/tweetie', 'carousel'); 
+ get_template_part('template-parts/bottom', 'widgets'); 
 
 
 get_footer();

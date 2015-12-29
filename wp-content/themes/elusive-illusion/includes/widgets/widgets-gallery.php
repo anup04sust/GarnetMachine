@@ -26,7 +26,8 @@ class Gallery_Popup_Widget extends WP_Widget {
         $title = apply_filters('widget_title', $instance['title']);
         $imgWidth = apply_filters('widget_img_width', $instance['img_width']);
         $imgHight = apply_filters('widget_img_height', $instance['img_height']);
-        $gallery_images = apply_filters('gallery_images', $instance['gallery_images']);
+        $gallery_images = apply_filters('widget_gallery_images', $instance['gallery_images']);
+        $galler_page_link = apply_filters('widget_galler_page_link', $instance['galler_page_link']);
         $gallery_images = !empty($gallery_images) ? maybe_unserialize($gallery_images) : false;
         echo $args['before_widget'];
 
@@ -44,28 +45,13 @@ class Gallery_Popup_Widget extends WP_Widget {
                 $carousel .= sprintf('<div class="gallery-item"><a href="%1$s" class="thumbnail os fadeIn"><img src="%2$s" alt="gallery-image" width="%3$s" height="%4$s" alt="Gallery Image"></a></div>', $image[0], $thumb_url[0], $imgWidth, $imgHight);
             }
             $carousel .= '</div>';
+            $carousel .= !empty($galler_page_link)? sprintf('<a href="%s" class="gallery-link">View More  →</a>',$galler_page_link):'';
             $carousel .= '</div>';
             $nav = ($carousel_nav == 'yes') ? 'true' : 'false';
             $dot = ($carousel_dot == 'yes') ? 'true' : 'false';
             $autoplay = ($carousel_autoplay == 'yes') ? 'true' : 'false';
             $item = !empty($image_display) ? $image_display : 1;
             echo $carousel;
-            ?>
-            <script type="text/javascript">
-                jQuery(document).ready(function () {
-                    if (typeof jQuery.fn.magnificPopup !== 'undefined') {
-                        jQuery('.popup-gallery').magnificPopup({
-                            type: 'image',
-                            delegate: 'a',
-                            gallery: {
-                                enabled: true
-                            }
-                        });
-                    }
-                   // console.log(typeof jQuery.fn.magnificPopup);
-                });
-            </script>
-            <?php
         }
         echo '<div class="clearfix"></div>';
         echo $args['after_widget'];
@@ -121,6 +107,14 @@ class Gallery_Popup_Widget extends WP_Widget {
             <input class="widefat" id="<?php echo $this->get_field_id('img_height'); ?>" name="<?php echo $this->get_field_name('img_height'); ?>" type="text" value="<?php echo esc_attr($img_height); ?>">
         </p>
         <?php
+        $galler_page_link = !empty($instance['galler_page_link']) ? $instance['galler_page_link'] : '';
+        ?>
+        <p>
+            <label for="<?php echo $this->get_field_id('galler_page_link'); ?>"><?php _e('Gapplery Page Link:'); ?></label> 
+            <input class="widefat" id="<?php echo $this->get_field_id('galler_page_link'); ?>" name="<?php echo $this->get_field_name('galler_page_link'); ?>" type="text" value="<?php echo esc_attr($galler_page_link); ?>">
+        </p>
+        <?php
+        
     }
 
     /**
@@ -137,6 +131,7 @@ class Gallery_Popup_Widget extends WP_Widget {
         $instance['gallery_images'] = (!empty($new_instance['gallery_images']) ) ? $new_instance['gallery_images'] : '';
         $instance['img_width'] = (!empty($new_instance['img_width']) ) ? $new_instance['img_width'] : '150px';
         $instance['img_height'] = (!empty($new_instance['img_height']) ) ? $new_instance['img_height'] : '150px';
+        $instance['galler_page_link'] = (!empty($new_instance['galler_page_link']) ) ? $new_instance['galler_page_link'] : '';
 
 
         return $instance;

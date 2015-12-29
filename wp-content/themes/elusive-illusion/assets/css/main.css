@@ -867,3 +867,22 @@ img {
   min-height: 50%; }
   .camera_eli_skin .camera_loader {
     background-color: transparent; }
+
+.wp-paginate {
+  display: inline-block;
+  padding-left: 0;
+  margin: auto auto;
+  border-radius: 0;
+  text-align: center;
+  clear: both; }
+  .wp-paginate > li {
+    display: inline-block; }
+    .wp-paginate > li > a, .wp-paginate > li > span {
+      display: block;
+      color: #333;
+      font-size: 16px;
+      line-height: 18px;
+      height: 32px;
+      padding: 7px 14px; }
+      .wp-paginate > li > a.current, .wp-paginate > li > span.current {
+        color: #000; }

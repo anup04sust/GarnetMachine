@@ -71,7 +71,7 @@ function theme_breadcrumbs() {
                         
                     }
                     $term_link = get_term_link( $termObj->term_id, $termObj->taxonomy );
-                    echo $before . sprintf('<a href="%2$s" title="%1$s">%1$s</a>',$termObj->name,$term_link) . $after;
+                    echo '<li>'. sprintf('<a href="%2$s" title="%1$s">%1$s</a>',$termObj->name,$term_link) . '</li>';
                 }
                 if ($showCurrent == 1)
                     echo ' ' . $delimiter . ' ' . $before . get_the_title() . $after;

@@ -7,6 +7,7 @@
 require_once dirname(__FILE__).'/widgets-social.php';
 require_once dirname(__FILE__).'/widgets-contacts.php';
 require_once dirname(__FILE__).'/widgets-gallery.php';
+require_once dirname(__FILE__).'/widgets-embed-shortcode.php';
 function theme_widgets_init() {
     register_sidebar(array(
         'name' => __('Sidebar Left'),
@@ -49,6 +50,7 @@ function theme_widgets_init() {
    register_widget('Theme_Social_Widget');
    register_widget('Theme_Contact_Widget');
    register_widget('Gallery_Popup_Widget');
+   register_widget('Theme_EMShortcode_Widget');
 }
 
 add_action('widgets_init', 'theme_widgets_init');

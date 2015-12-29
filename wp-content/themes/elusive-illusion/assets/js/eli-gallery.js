@@ -10,15 +10,19 @@ nc(document).ready(function () {
     itemSelector: '.gallery-gcol',
     layoutMode: 'packery'
   });
+  var $grid = nc('#inner-content .album-page').isotope({
+    itemSelector: '.gallery-item',
+    layoutMode: 'packery'
+  });
 // layout Masonry after each image loads
   $grid.imagesLoaded().progress(function () {
     $grid.isotope('layout');
   });
-  nc('#gallery-tiles .gallery-wrap').Chocolat({
-    loop: true,
-    imageSize: 'contain',
-    overlayOpacity: 0.9,
-    imageSelector: '.thumbnail-links'
-  });
+//  nc('#gallery-tiles .gallery-wrap').Chocolat({
+//    loop: true,
+//    imageSize: 'contain',
+//    overlayOpacity: 0.9,
+//    imageSelector: '.thumbnail-links'
+//  });
 });
 
