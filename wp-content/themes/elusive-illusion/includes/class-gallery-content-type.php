@@ -23,6 +23,7 @@ class Gallery_Content_Type {
     add_action('init', array($this, 'taxonomies'));
     add_shortcode('gallerys', array($this, 'shortcodes'));
     add_action('wp_enqueue_scripts', array($this, 'scripts'));
+    add_action('admin_enqueue_scripts', array($this, 'admin_scripts'));
     $this->metabox();
   }
 
@@ -32,6 +33,12 @@ class Gallery_Content_Type {
     wp_enqueue_script('isotope', ELUSICVE_THEME_ASSETS . 'js/vendor/isotope.pkgd.min.js', array('jquery'), 3.0, TRUE);
     wp_enqueue_script('chocolat-lightbox', ELUSICVE_THEME_ASSETS . 'chocolat-lightbox/js/jquery.chocolat.min.js', array('jquery'), 3.0, TRUE);
     wp_enqueue_script('eli-gallery', ELUSICVE_THEME_ASSETS . 'js/eli-gallery.js', array('jquery', 'isotope', 'jquery-masonry'), 1.0, TRUE);
+  }
+
+  function admin_scripts() {
+    wp_enqueue_style('gallery-admin-style', ELUSICVE_THEME_ADMIN_URI . 'css/eli_gallery.css');
+    wp_enqueue_script('gallery-admin-js', ELUSICVE_THEME_ADMIN_URI . 'js/admin-gallery.js', array('jquery', 'media-upload'), 1.0, TRUE);
+    wp_localize_script('gallery-admin-js', 'ELIGALLERY_SETTINGS', array('ajax_url' => admin_url('admin-ajax.php'), 'action' => 'gallery_admin_action'));
   }
 
   public function register() {
@@ -65,7 +72,7 @@ class Gallery_Content_Type {
       'hierarchical' => false,
       'menu_position' => null,
       'show_in_nav_menus' => FALSE,
-      'supports' => array('title', 'excerpt'),
+      'supports' => array('title', 'thumbnail'),
       'menu_icon' => ELUSICVE_THEME_ADMIN_URI . '/images/icon-gallery.png'
     );
     register_post_type($this->post_type, $gallery_arg);
@@ -107,54 +114,57 @@ class Gallery_Content_Type {
   }
 
   function metabox() {
+    add_action('add_meta_boxes', array($this, 'gallery_admin'));
+    add_action('save_post', array($this, 'gallery_save_data'));
+
     if (function_exists("register_field_group")) {
-/*      register_field_group(array(
+      /*      register_field_group(array(
         'id' => 'acf_album_metabox',
         'title' => 'Cover Photo',
         'fields' => array(
-          array(
-            'key' => 'gallery_album_cover',
-            'label' => 'Cover Image(358X254)',
-            'name' => 'cover_image',
-            'type' => 'image',
-            'save_format' => 'object',
-            'preview_size' => 'thumbnail',
-            'library' => 'all',
-          ),
-          array(
-            'key' => 'gallery_custom_order',
-            'label' => 'Order',
-            'name' => 'custom_order',
-            'type' => 'number',
-            'default_value' => '1',
-            'placeholder' => '',
-            'prepend' => '',
-            'append' => '',
-            'min' => '',
-            'max' => '',
-            'step' => '',
-          ),
+        array(
+        'key' => 'gallery_album_cover',
+        'label' => 'Cover Image(358X254)',
+        'name' => 'cover_image',
+        'type' => 'image',
+        'save_format' => 'object',
+        'preview_size' => 'thumbnail',
+        'library' => 'all',
+        ),
+        array(
+        'key' => 'gallery_custom_order',
+        'label' => 'Order',
+        'name' => 'custom_order',
+        'type' => 'number',
+        'default_value' => '1',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'min' => '',
+        'max' => '',
+        'step' => '',
+        ),
         ),
         'location' => array(
-          array(
-            array(
-              'param' => 'ef_taxonomy',
-              'operator' => '==',
-              'value' => 'gallery-album',
-              'order_no' => 0,
-              'group_no' => 0,
-            ),
-          ),
+        array(
+        array(
+        'param' => 'ef_taxonomy',
+        'operator' => '==',
+        'value' => 'gallery-album',
+        'order_no' => 0,
+        'group_no' => 0,
+        ),
+        ),
         ),
         'options' => array(
-          'position' => 'normal',
-          'layout' => 'default',
-          'hide_on_screen' => array(
-          ),
+        'position' => 'normal',
+        'layout' => 'default',
+        'hide_on_screen' => array(
+        ),
         ),
         'menu_order' => 0,
-      ));
-*/
+        ));
+       */
       register_field_group(array(
         'id' => 'acf_images',
         'title' => 'Cover Images',
@@ -226,11 +236,44 @@ class Gallery_Content_Type {
     }
   }
 
+  function gallery_admin() {
+    $screens = array($this->post_type);
+    add_meta_box('gallery_metabox', __('Gallery Images'), array($this, 'gallery_admin_calback'), $screen, 'advanced', 'core');
+  }
+
+  function gallery_admin_calback($post) {
+    echo '<div class="admin-gallery-images">';
+    echo '<div class="eli-gallery-wrap">';
+   
+    $gallery_images = get_post_meta($post->ID, '_gattachment', TRUE);
+    
+    if (!empty($gallery_images)) {
+       $gattachments = maybe_unserialize($gallery_images);      
+      foreach ($gattachments as $attid => $img) {
+        if(!empty($img))
+        echo sprintf('<figure id="preview-wrap-%1$s"><input type="hidden" name="gattachment[%1$s][url]" value="%2$s"><input type="hidden" name="gattachment[%1$s][thumbnail]" value="%3$s"><img src="%3$s" alt="%1$s"><button onclick="ELIGALLERY.removeImage(%1$s)" type="button"><span class="dashicons dashicons-no-alt"></span></button></figure>',$attid,$img['url'],$img['thumbnail']);
+      }
+    }else{
+       echo '<input type="hidden" name="gattachment[0]" value="0" />';
+    }
+    echo '</div>';
+    echo '<div id="upload-button-' . $post->ID . '" class="eli-gfooter"><button class="upload-button button button-hero" type="button" onclick="ELIGALLERY.UploadImage(this,' . $post->ID . ')">Upload Images</button></div>';
+    echo '</div>';
+  }
+
+  function gallery_save_data($post_id) {
+    if (!isset($_POST['gattachment'])) {
+      return;
+    }
+    $gattachment = maybe_serialize($_POST['gattachment']);
+    update_post_meta( $post_id, '_gattachment', $gattachment );  
+  }
+
 }
 
 new Gallery_Content_Type();
 
-function get_eli_gallerys($args = array()) {
+function get_eli_galleries($args = array()) {
   $defaults = array(
     'post_type' => 'eli_gallery',
     'orderby' => 'meta_value_num',
@@ -244,11 +287,14 @@ function get_eli_gallerys($args = array()) {
   if (!empty($gallerys_query)) {
     foreach ($gallerys_query as $key => $gallery) {
       $sdata = new stdClass();
+      $sdata->ID = $gallery->ID;
       $sdata->title = $gallery->post_title;
       $sdata->grid_size = get_field('grid_size', $gallery->ID);
       $thumbnail_att_id = get_field('thumbnail', $gallery->ID);
       $sdata->thumbnail = wp_get_attachment_url($thumbnail_att_id);
       $sdata->link = get_the_permalink($gallery->ID);
+      $attchment = get_post_thumbnail_id($gallery->ID, 'full');
+      $sdata->cover_preview = wp_get_attachment_url($attchment);
       $gallerys_data[$key] = $sdata;
     }
   }
@@ -270,4 +316,33 @@ function get_eli_gallery_grid_col($size) {
       break;
   }
   return $col;
+}
+
+function get_gallery_attachment( $attachment_id ) {
+
+	$attachment = get_post( $attachment_id );
+  
+  $attm = new stdClass();
+  $attm->alt = get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true );
+  $attm->caption = $attachment->post_excerpt;
+  $attm->description = $attachment->post_content;
+  $attm->href = get_permalink( $attachment->ID );
+  $attm->src = $attachment->guid;
+  $attm->title = $attachment->post_title;
+	return $attm;
+}
+function get_gallery_popupobjs($post_id,$title_prefix=''){
+  $attachments = get_post_meta($post_id, '_gattachment', TRUE);
+  wpprint($attachments);
+  if($attachments){
+    $gattachments = maybe_unserialize($attachments);
+    $imagedata = array();
+        foreach ($gattachments as $attid => $img) {
+        if(!empty($img)){
+          $attachment = get_gallery_attachment($attid); 
+          $imagedata[] = array('src'=>$img['url'],'title'=>$title_prefix.$attachment->title);
+        }        
+      }
+      return json_encode($imagedata);
+  }
 }

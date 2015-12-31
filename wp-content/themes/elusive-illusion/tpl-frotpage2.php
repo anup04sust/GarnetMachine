@@ -11,7 +11,7 @@ global $eli_options;
         <?php get_template_part('template-parts/home', 'camera-slider'); ?> 
         <?php get_template_part('template-parts/home', 'products'); ?> 
         <?php get_template_part('template-parts/service', 'widgets'); ?> 
-        <?php get_template_part('template-parts/gallery', 'widgets'); ?> 
+        <?php get_template_part('template-parts/home', 'gallery'); ?> 
         <section id="inner-content">
           <div class="<?php theme_layout_style(); ?>">
             <div class="row">

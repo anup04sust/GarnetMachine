@@ -603,7 +603,7 @@ span[aria-hidden="true"], a[aria-hidden="true"], label[aria-hidden="true"] {
     #inner-content .eli_products .entry-excerpt .btn-link, #inner-content .eli_service .entry-excerpt .btn-link {
       padding: 0;
       color: #bc0e16; }
-    #inner-content .eli_products.single-product, #inner-content .eli_service.single-product {
+    #inner-content .eli_products.single-product, #inner-content .eli_products.single-service, #inner-content .eli_service.single-product, #inner-content .eli_service.single-service {
       border-bottom: 0px; }
   #inner-content .album-wrap {
     border-bottom: 1px solid #f3f3f3;
@@ -658,6 +658,42 @@ span[aria-hidden="true"], a[aria-hidden="true"], label[aria-hidden="true"] {
         transform: scale(1.2); }
     #inner-content .album-wrap.album-page {
       border-bottom: 0; }
+    #inner-content .album-wrap.single-post {
+      border-bottom: 0; }
+  #inner-content .gattachment {
+    position: relative;
+    margin-bottom: 35px;
+    min-height: 150px;
+    text-align: center; }
+    #inner-content .gattachment .ggird {
+      margin-bottom: 30px; }
+    #inner-content .gattachment .thumbnail {
+      display: inline-block;
+      vertical-align: top;
+      border: 1px solid #f3f3f3;
+      border-radius: 1px;
+      margin: 0px;
+      padding: 0px;
+      over-flow: hidden; }
+      #inner-content .gattachment .thumbnail > a {
+        display: block;
+        max-width: 100%;
+        overflow: hidden;
+        height: 100%; }
+      #inner-content .gattachment .thumbnail img {
+        width: 100%;
+        border-radius: 1px;
+        height: auto;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out; }
+      #inner-content .gattachment .thumbnail:hover img {
+        -moz-transform: scale(1.2);
+        -o-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2); }
   #inner-content .post-navigation {
     border-top: 1px solid #f3f3f3;
     padding: 10px 0;
@@ -707,6 +743,11 @@ span[aria-hidden="true"], a[aria-hidden="true"], label[aria-hidden="true"] {
     margin-top: 4px;
     opacity: 0.7;
     padding: 2px 10px; }
+
+.chocolat-wrapper .chocolat-overlay {
+  background-color: rgba(0, 0, 0, 0.8); }
+.chocolat-wrapper .chocolat-content {
+  border: 5px solid rgba(255, 255, 255, 0.5); }
 
 /* 
 * Overwrite Bootstrap Style

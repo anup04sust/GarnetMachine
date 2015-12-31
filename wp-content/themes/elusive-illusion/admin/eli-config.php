@@ -739,12 +739,20 @@ class ELI_Config {
         'title' => __('Gallery Block Title', ELUSICVE_THEME_LAN),        
         'default' => __('Gallery'),
       ),
-      array(
+/*      array(
         'id' => 'gallery_album',
         'type' => 'select',
         'data' => 'terms',
          'args' => array('taxonomies'=>'gallery-album'),
         'title' => __('Album', ELUSICVE_THEME_LAN), 
+      ),*/
+      array(
+        'id' => 'gallery_album',
+        'type' => 'select',
+        'data' => 'posts',
+        'multi'=>true,
+         'args' => array('post_type'=>'eli_gallery','posts_per_page'=>-1),
+        'title' => __('Galleries', ELUSICVE_THEME_LAN), 
       ),
       array(
         'id' => 'gallery_block_img_count',
