@@ -12,9 +12,9 @@
     $post_id = get_the_ID();
     $gallery_images = get_post_meta($post_id, '_gattachment', TRUE);
     $gattachments = maybe_unserialize($gallery_images);
+    unset($gattachments[0]);
     if (!empty($gattachments)):
-      unset($gattachments[0]);
-    $cointer = 1;
+        $cointer = 1;
       foreach ($gattachments as $attachment_id => $img):
       
              $attchment = wp_get_attachment_image_src($attachment_id, 'medium');

@@ -10,8 +10,11 @@ $gallery_images = get_post_meta($post_id, '_gattachment', TRUE);
 <div <?php post_class('single-post'); ?>>
   <div id="gattachment-gallery" class="gattachment clearfix row">
     
-  <?php if (!empty($gallery_images)): 
-    $gattachments = maybe_unserialize($gallery_images);  
+  <?php 
+  $gattachments = maybe_unserialize($gallery_images);  
+  unset($gattachments[0]);
+  if (!empty($gattachments)): 
+ 
         foreach ($gattachments as $attid => $img) {
         if(!empty($img)){
           $attachment = get_gallery_attachment($attid);          
