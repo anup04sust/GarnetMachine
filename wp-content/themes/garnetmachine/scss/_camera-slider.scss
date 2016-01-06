@@ -46,7 +46,12 @@
           max-width: 767px;
           padding: 0 15px;
           color: #fff;
+
         }
+          @media (max-width: $screen-sm-min) {
+            font-size:$font-size-sm;
+                padding: 10px 25px;
+          }
       }
       .caption-text{
         max-width: 470px;

@@ -29,7 +29,7 @@ class ELI_Config {
   }
 
   public function addActions() {
-    add_action("redux/extensions/{$this->opt_name}/before", array($this, 'addExtensions'), 0);
+    //add_action("redux/extensions/{$this->opt_name}/before", array($this, 'addExtensions'), 0);
     add_action('admin_enqueue_scripts', array($this, 'scripts'));
   }
 
@@ -178,7 +178,7 @@ class ELI_Config {
     $sections[] = $this->optionInnerContent();
     $sections[] = $this->optionFooter();
     $sections[] = $this->optionContact();
-    $sections[] = $this->optionSocial();    
+    $sections[] = $this->optionSocial();
     $sections[] = $this->optionTweet();
     $sections[] = $this->optionloginScreen();
     $sections[] = $this->frontPageTpl2();
@@ -475,6 +475,7 @@ class ELI_Config {
         //'subsection' => TRUE,
     );
   }
+
   function optionContact() {
     $fields = array(
       array(
@@ -513,7 +514,7 @@ class ELI_Config {
         'id' => 'contact_form_shortcode',
         'type' => 'text',
         'title' => __('Add Form Shortcode(Contact Form 7)', ELUSICVE_THEME_LAN),
-      ),      
+      ),
     );
     return array(
       'title' => __('Contact', ELUSICVE_THEME_LAN),
@@ -525,8 +526,7 @@ class ELI_Config {
   }
 
   function optionSocial() {
-    $fields = array(     
-
+    $fields = array(
       array(
         'title' => __('Widget Inner Text', ELUSICVE_THEME_LAN),
         'id' => 'social_icons_prefix',
@@ -706,7 +706,7 @@ class ELI_Config {
       array(
         'id' => 'product_block_title',
         'type' => 'text',
-        'title' => __('Product Block Title', ELUSICVE_THEME_LAN),        
+        'title' => __('Product Block Title', ELUSICVE_THEME_LAN),
         'default' => __('Products'),
       ),
       array(
@@ -715,13 +715,13 @@ class ELI_Config {
         'output' => array('#products-block'),
         'title' => __('Block Background', ELUSICVE_THEME_LAN),
         'subtitle' => __('Style Block (default: #FFFFFF).', ELUSICVE_THEME_LAN),
-        'default'   => '#FFFFFF',
+        'default' => '#FFFFFF',
         'mode' => 'background',
       ),
       array(
         'id' => 'service_block_title',
         'type' => 'text',
-        'title' => __('Service Block Title', ELUSICVE_THEME_LAN),        
+        'title' => __('Service Block Title', ELUSICVE_THEME_LAN),
         'default' => __('Services'),
       ),
       array(
@@ -730,34 +730,41 @@ class ELI_Config {
         'output' => array('#service-widgets'),
         'title' => __('Block Background', ELUSICVE_THEME_LAN),
         'subtitle' => __('Style Block (default: #FFFFFF).', ELUSICVE_THEME_LAN),
-        'default'   => '#000',
+        'default' => '#000',
         'mode' => 'background',
       ),
       array(
         'id' => 'gallery_block_title',
         'type' => 'text',
-        'title' => __('Gallery Block Title', ELUSICVE_THEME_LAN),        
+        'title' => __('Gallery Block Title', ELUSICVE_THEME_LAN),
         'default' => __('Gallery'),
       ),
-/*      array(
+      /*      array(
         'id' => 'gallery_album',
         'type' => 'select',
         'data' => 'terms',
-         'args' => array('taxonomies'=>'gallery-album'),
-        'title' => __('Album', ELUSICVE_THEME_LAN), 
-      ),*/
-      array(
+        'args' => array('taxonomies'=>'gallery-album'),
+        'title' => __('Album', ELUSICVE_THEME_LAN),
+        ),
+        array(
         'id' => 'gallery_album',
         'type' => 'select',
         'data' => 'posts',
         'multi'=>true,
-         'args' => array('post_type'=>'eli_gallery','posts_per_page'=>-1),
-        'title' => __('Galleries', ELUSICVE_THEME_LAN), 
+        'args' => array('post_type'=>'eli_gallery','posts_per_page'=>-1),
+        'title' => __('Galleries', ELUSICVE_THEME_LAN),
+        ), */
+      array(
+        'id' => 'tpl2-gallery',
+        'type' => 'gallery',
+        'title' => __('Add/Edit Gallery', ELUSICVE_THEME_LAN),
+        'subtitle' => __('Create a new Gallery by selecting existing or uploading new images using the WordPress native uploader', ELUSICVE_THEME_LAN),
+        'desc' => __('Select Grid for each image. Small (150X110), Medium (320X230), Large (450X350) in pixel or its rational size.', ELUSICVE_THEME_LAN),
       ),
       array(
         'id' => 'gallery_block_img_count',
         'type' => 'text',
-        'title' => __('Number of image show', ELUSICVE_THEME_LAN),        
+        'title' => __('Number of image show', ELUSICVE_THEME_LAN),
         'default' => 10,
       ),
     );
@@ -772,10 +779,11 @@ class ELI_Config {
   }
 
   public function addExtensions($ReduxFramework) {
-     return false; 
+    return false;
     $path = dirname(__FILE__) . '/extensions/';
     $folders = scandir($path, 1);
-    if(empty($folders)) return false;
+    if (empty($folders))
+      return false;
     foreach ($folders as $folder) {
       if ($folder === '.' or $folder === '..' or ! is_dir($path . $folder)) {
         continue;
@@ -803,3 +811,31 @@ class ELI_Config {
 
 $theme_options = new ELI_Config();
 $theme_options->init();
+
+if(is_admin()){
+  add_filter('attachment_fields_to_edit', 'be_attachment_field_tiles_grid', 10, 2);
+  add_filter('attachment_fields_to_save', 'be_attachment_field_tiles_grid_save', 10, 2);
+}
+function be_attachment_field_tiles_grid($form_fields, $post) {
+    $cgrid = get_post_meta($post->ID, 'tiles_grid', true);
+    $grid = "<select name='attachments[{$post->ID}][tiles_grid]'>";
+    $grid .= "<option value='small' ".selected( $cgrid, 'small',FALSE )  .">".__('Small')."</option>"; 
+    $grid .= "<option value='medium' ".selected( $cgrid, 'medium',FALSE )  .">".__('Medium')."</option>"; 
+    $grid .= "<option value='large' ".selected( $cgrid, 'large',FALSE )  .">".__('Large')."</option>"; 
+    $grid .= '</select>';
+    $form_fields['tiles-gallary-grid'] = array(
+      'label' => 'Grid',
+      'input' => 'html',
+      'html' => $grid,     
+    );
+
+  return $form_fields;
+}
+function be_attachment_field_tiles_grid_save($post, $attachment) { 
+  if (isset($attachment['tiles_grid']))
+    update_post_meta($post['ID'], 'tiles_grid', $attachment['tiles_grid']);
+
+  return $post;
+}
+
+

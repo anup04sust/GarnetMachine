@@ -251,6 +251,9 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
 #bottom-widgets{
   background-color: $bg-color2;
   position: relative;
+  .widget-area{
+    margin-bottom: 30px;
+  }
   .widget{
     .widget-title{
       color: $font-color3;
@@ -277,6 +280,18 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
             color: $font-color2;
           }
         }
+      }
+    }
+    &.widget_nav_menu{
+      display: inline-block;
+      padding-right: 6%;
+      vertical-align: top;
+      width: 45%;
+      @media (max-width: $screen-md-min) {
+        width: 99%;
+        padding-right: 0%;
+        display: block;
+        margin-bottom:0px;
       }
     }
   }
@@ -314,6 +329,9 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
     a,p{
       color: inherit;
     }
+  }
+  @media (max-width: $screen-md-min) {
+        padding-bottom: 15px;
   }
 }
 #inner-content{
@@ -408,6 +426,9 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
       a{
         color: inherit;
         text-decoration: none;
+      }
+      .addr-phone,.addr-email{
+        white-space: nowrap;
       }
     }
   }
@@ -608,21 +629,22 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
           background-position:left bottom;
           background-repeat: repeat-x;
           bottom: 0;
-
+          opacity:0;
+           @include transition(all, 0.5s);
           >span{
             position: absolute;
             bottom: 14px;
             left: 22px;
-            font-size: 20px;
+            font-size: $font-size-sm;
             right: 22px;
             font-weight: bold;
-            color: #fff;          
-            overflow: hidden;           
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            color: #fff; 
           }
         }
         &:hover{
+          .caption{
+            opacity:1;
+          }
           img{         
             @include scale(1.2);
           }
@@ -640,9 +662,12 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
     position: relative;
     margin-bottom:35px;
     min-height: 150px;
+    margin-left: -5px;
+    margin-right: -5px;
     text-align:center;
     .ggird{
-      margin-bottom: 30px;
+      margin-bottom: 10px;
+      padding: 0 5px;
     }
     .thumbnail{
       display: inline-block;
@@ -651,6 +676,7 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
       border-radius: 1px;
       margin:0px;
       padding:0px;
+      width: 100%;
       over-flow:hidden;
       > a{
         display: block;
@@ -747,7 +773,27 @@ span[aria-hidden="true"],a[aria-hidden="true"],label[aria-hidden="true"]{
     background-color: rgba(0,0,0,.8);
   }
   .chocolat-content{
-    border: 5px solid rgba(255,255,255,.5);
+    border: 8px solid rgba(0,0,0,.7);
+    .chocolat-img{
+       border: 1px solid rgba(0,0,0,.5);
+    }
+    
+  }
+  .chocolat-bottom{
+    text-align: center!important;
+     background-color: rgba(0,0,0,1)!important;
+     .chocolat-description{
+       color: #fff;
+       float: none;
+     }
+     .chocolat-fullscreen{
+       position: absolute;
+       left: 15px;
+     }
+     .chocolat-pagination{
+       position: absolute;
+       right: 0;
+     }
   }
 }
 @import "bootstrap";

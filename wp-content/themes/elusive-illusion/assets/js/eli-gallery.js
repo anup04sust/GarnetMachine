@@ -28,12 +28,12 @@ nc(document).ready(function () {
   $grid3.imagesLoaded().progress(function () {
     $grid3.isotope('layout');
   });
-  nc('#gattachment-gallery').Chocolat({
-    loop: false,
-    imageSize: 'default',
-    overlayOpacity: 0.9,
-    imageSelector: '.gattachment-preview'
-  });
+//  nc('#gattachment-gallery').Chocolat({
+//    loop: false,
+//    imageSize: 'default',
+//    overlayOpacity: 0.9,
+//    imageSelector: '.gattachment-preview'
+//  });
   nc('.album-wrap').Chocolat({
     loop: false,
     imageSize: 'default',
@@ -42,7 +42,7 @@ nc(document).ready(function () {
   });
   nc('#gallery-tiles').Chocolat({
     loop: true,
-    imageSize: 'default',
+    imageSize: 'container',
     overlayOpacity: 0.9,
     imageSelector: '.thumbnail-links'
   });

@@ -12,25 +12,28 @@
     $post_id = get_the_ID();
     $gallery_images = get_post_meta($post_id, '_gattachment', TRUE);
     $gattachments = maybe_unserialize($gallery_images);
-    unset($gattachments[0]);
+    if(isset($gattachments[0])){
+      unset($gattachments[0]);
+    }
+    
     if (!empty($gattachments)):
         $cointer = 1;
       foreach ($gattachments as $attachment_id => $img):
       
              $attchment = wp_get_attachment_image_src($attachment_id, 'medium');
-             $thumbnail = $attchment[0];
+             $thumbnail = @$attchment[0];
              $att = get_gallery_attachment($attachment_id);
         ?>
-        <div class="col-xs-6 col-sm-4 gallery-item">
+        <div class="col-xs-6 col-sm-3 gallery-item">
           <div class="thumbnail">
             <img src="<?php echo $thumbnail; ?>" alt="<?php echo $att->title; ?>" />
-            <a class="caption" href="<?php echo @$img['url']; ?>">
-              <span><?php echo  $att->title; ?></span>
+            <a class="caption" href="<?php echo @$img['url']; ?>" title="<?php echo  !empty($att->caption)? $att->caption:$att->title; ?>">
+              <span><?php echo  !empty($att->caption)? $att->caption:$att->title; ?></span>
             </a>
           </div>
         </div>
         <?php
-        if($cointer == 3) break;
+        if($cointer == 4) break;
         $cointer ++;
       endforeach;
     else:

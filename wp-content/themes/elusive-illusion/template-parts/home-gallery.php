@@ -6,14 +6,10 @@
  */
 global $eli_options;
 $album = $eli_options['gallery_album'];
-$img_count = intval($eli_options['gallery_block_img_count']);
-
-$gl_query = array(
-  'posts_per_page'=>$img_count,
-  'include'=>$album,
-);
-$galleries = get_eli_galleries($gl_query);
-if (!empty($galleries)) :
+$opt_gallery = $eli_options['tpl2-gallery'];
+$opt_galleries = !empty($opt_gallery) ? explode(',', $opt_gallery):array();
+$galleries = get_posts(array('post_type'=>'attachment','include'=>$opt_galleries,'orderby' => 'post__in','post_mime_type' => 'image','numberposts' => -1));
+if (!empty($opt_gallery)) :
   ?>
   <section id="gallery-tiles" class="page-block clearfix">
     <div class="<?php theme_layout_style(); ?>">
@@ -23,16 +19,20 @@ if (!empty($galleries)) :
         </div>
       </div>
       <div class="gallery-wrap clearfix">      
-        <?php foreach($galleries as $key=>$img):
-          $gcol = get_eli_gallery_grid_col($img->grid_size);
+        <?php foreach($galleries as $key=>$attachment):
+          
+          $grid_size = get_post_meta($attachment->ID, 'tiles_grid', true);
+          $gcol = get_eli_gallery_grid_col($grid_size);
+          $img_src =  wp_get_attachment_image_src( $attachment->ID, 'full' );
+         
           ?>
-        <div class="gcol-xs-<?php echo $gcol .' '.$img->grid_size; ?> gallery-gcol">
-            <div class="thumbnail gallery-thumb">
-              <img alt="<?php echo $img->title; ?>" src="<?php echo $img->thumbnail; ?>">
+        <div class="gcol-xs-<?php echo $gcol .' '.$grid_size; ?> gallery-gcol" id="attachment-<?php echo $attachment->ID;?>">
+            <div class="thumbnail gallery-thumb" >
+              <img alt="<?php echo $attachment->post_title; ?>" src="<?php echo @$img_src[0]; ?>">
               <div class="caption">              
-                <?php echo wpautop($img->title);?>
+                <p><?php echo ($attachment->post_content)?$attachment->post_content:$attachment->post_title;?></p>
               </div>
-              <a title=" <?php echo $img->title;?>" href="<?php echo $img->cover_preview; ?>" class="thumbnail-links"></a>
+              <a title=" <?php echo ($attachment->post_content)?$attachment->post_content:$attachment->post_title;?>" href="<?php echo @$img_src[0]; ?>" class="thumbnail-links"></a>
             </div>
             </div>          
         <?php endforeach;

@@ -45,16 +45,16 @@ class Gallery_Content_Type {
     $gallery_labels = array(
       'name' => _x('Gallery', 'post type general name', $this->lan),
       'singular_name' => _x('Gallery', 'post type singular name', $this->lan),
-      'menu_name' => _x('Gallerys', 'admin menu', $this->lan),
+      'menu_name' => _x('Galleries', 'admin menu', $this->lan),
       'name_admin_bar' => _x('Gallery', 'add new on admin bar', $this->lan),
       'add_new' => _x('Add New', 'Gallery', $this->lan),
       'add_new_item' => __('Add New Gallery', $this->lan),
       'new_item' => __('New Gallery', $this->lan),
       'edit_item' => __('Edit Gallery', $this->lan),
       'view_item' => __('View Gallery', $this->lan),
-      'all_items' => __('All Gallerys', $this->lan),
-      'search_items' => __('Search Gallerys', $this->lan),
-      'parent_item_colon' => __('Parent Gallerys:', $this->lan),
+      'all_items' => __('All Galleries', $this->lan),
+      'search_items' => __('Search Galleries', $this->lan),
+      'parent_item_colon' => __('Parent Galleries:', $this->lan),
       'not_found' => __('No gallerys found.', $this->lan),
       'not_found_in_trash' => __('No gallerys found in Trash.', $this->lan)
     );
@@ -167,9 +167,9 @@ class Gallery_Content_Type {
        */
       register_field_group(array(
         'id' => 'acf_images',
-        'title' => 'Cover Images',
+        'title' => 'Additional Fields',
         'fields' => array(
-          array(
+        /*  array(
             'key' => 'gallery_image_grid_size',
             'label' => 'Tile Grid Size',
             'name' => 'grid_size',
@@ -205,7 +205,7 @@ class Gallery_Content_Type {
             'save_format' => 'object',
             'preview_size' => 'thumbnail',
             'library' => 'all',
-          ),
+          ),*/
           array(
             'key' => 'gallery_image_custom_order',
             'label' => 'Order',
@@ -226,7 +226,7 @@ class Gallery_Content_Type {
           ),
         ),
         'options' => array(
-          'position' => 'acf_after_title',
+          'position' => 'normal',
           'layout' => 'default',
           'hide_on_screen' => array(
           ),

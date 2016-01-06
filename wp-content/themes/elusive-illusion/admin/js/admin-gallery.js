@@ -13,37 +13,46 @@ var ELIGALLERY = {
     var send_attachment_bkp = wp.media.editor.send.attachment;
     var _custom_media = true;
     wp.media.editor.send.attachment = function (props, attachment) {
-      nc('#preview-wrap-'+attachment.id).remove();
+      nc('#preview-wrap-' + attachment.id).remove();
       var previewWrap = nc('<figure>');
-      previewWrap.attr('id','preview-wrap-'+attachment.id);
-      
+      previewWrap.attr('id', 'preview-wrap-' + attachment.id);
+
       var imgUrl = nc('<input />');
-      imgUrl.attr('name','gattachment['+attachment.id+'][url]');     
-      imgUrl.attr('value',attachment.url);
-      imgUrl.attr('type','hidden');      
+      imgUrl.attr('name', 'gattachment[' + attachment.id + '][url]');
+      imgUrl.attr('value', attachment.url);
+      imgUrl.attr('type', 'hidden');         
       imgUrl.appendTo(previewWrap);
-      
-      var thumbnail = nc('<input />');
-      thumbnail.attr('name','gattachment['+attachment.id+'][thumbnail]');     
-      thumbnail.attr('value',attachment.sizes.medium.url);
-      thumbnail.attr('type','hidden');      
-      thumbnail.appendTo(previewWrap);     
-      
+      console.log(attachment);
+      if (nc.type(attachment.sizes.medium)  === "undefined") {
+        var thumbnail = nc('<input />');
+        thumbnail.attr('name', 'gattachment[' + attachment.id + '][thumbnail]');
+        thumbnail.attr('value', attachment.sizes.thumbnail.url);
+        thumbnail.attr('type', 'hidden');
+        thumbnail.appendTo(previewWrap);
+      } else {
+        var thumbnail = nc('<input />');
+        thumbnail.attr('name', 'gattachment[' + attachment.id + '][thumbnail]');
+        thumbnail.attr('value', attachment.sizes.medium.url);
+        thumbnail.attr('type', 'hidden');
+        thumbnail.appendTo(previewWrap);
+      }
+
+
       var imgpreview = nc('<img />');
-      imgpreview.attr('src',attachment.sizes.thumbnail.url);
-      imgpreview.attr('alt',attachment.id);      
+      imgpreview.attr('src', attachment.sizes.thumbnail.url);
+      imgpreview.attr('alt', attachment.id);
       imgpreview.appendTo(previewWrap);
-      
-      var closeButton = nc('<button type="button" onclick="ELIGALLERY.removeImage(this)"><span class="dashicons dashicons-no-alt"></span></button>');
+
+      var closeButton = nc('<button type="button" onclick="ELIGALLERY.removeImage(' + attachment.id + ')"><span class="dashicons dashicons-no-alt"></span></button>');
       closeButton.appendTo(previewWrap);
-      previewWrap.appendTo(gallerywrap);      
- 
+      previewWrap.appendTo(gallerywrap);
+
     }
     wp.media.editor.open();
     return false;
   },
-  removeImage:function(attachmentID){
-     nc('#preview-wrap-'+attachmentID).fadeIn('slow').remove();
+  removeImage: function (attachmentID) {
+    nc('#preview-wrap-' + attachmentID).fadeIn('slow').remove();
   },
 }
 /*
